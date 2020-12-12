@@ -1,0 +1,34 @@
+# include <stdio.h>
+# include <unistd.h>
+main()
+{
+int original, clone1,clone2,clone3,clone4 ;
+original = fork() ;
+clone1 = fork() ;
+clone3 = fork() ;
+if (clone1 != 0 && clone3 != 0 && original != 0)
+{
+printf("\n\nI am the original process, my process identifier is %d", original);
+printf(" my clones are \n");
+printf("\nprocess clone1: %d", clone1);
+printf("\nprocess clone3: %d", clone3);
+}
+if (clone1 == 0&& clone3 != 0 && original != 0)
+{
+clone2 = fork();
+if (clone2 != 0)
+{
+printf("\n\nProcess clone1 : ");
+printf("\nI am the obsolete version, recent version is %d", clone2);
+}
+}
+if (clone3 == 0 && clone1 != 0 && original != 0)
+{
+clone4 = fork();
+if (clone4 == 0)
+{
+printf("\n\nProcess clone4: ");
+printf("\nI am the most sophisticated clone, process identifier of my parents is %d", getppid() );
+}
+}
+}
