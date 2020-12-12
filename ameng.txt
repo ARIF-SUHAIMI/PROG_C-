@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main()
+{
+int original,clone1,clone2,clone3,clone4;
+original=fork();
+clone1=fork();
+clone3=fork();
+
+if(original!=0&&clone1!=0&&clone3!=0)
+{
+printf("\n I am the original process, my process identifier is %d",original);
+printf("\n my clones are: \n");
+printf("process clone1:%d",clone1);
+printf("process clone2:%d",clone3);
+}
+
+if(original!=0&&clone1==0&&clone3!=0)
+{
+clone2=fork();
+printf("I am the obsolete version, recent version is%d",clone2);
+}
+
+if(original!=0&&clone3!=0&&clone4==0)
+{
+clone4=fork();
+printf("I am the most sophiscated clone, process identifier of my parent is %d",clone3);
+}}
